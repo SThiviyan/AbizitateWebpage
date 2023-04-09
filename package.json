@@ -1,0 +1,15 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "Code for a website that collects quotes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thiviyan Saravanamuthu",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "flickity": "^3.0.0"
+  }
+}

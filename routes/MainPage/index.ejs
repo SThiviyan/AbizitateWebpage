@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Abizitate 2024</title>
+    <link rel="stylesheet" type="text/css" href="/public/stylesheet.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2.3.0/dist/flickity.css" media="screen">
+</head>
+<body>
+    <div class = "card">
+        <div class="FirstCard">
+            <div class="Heading">Abizitate</div> 
+            <div class="SubheadingStart">Abizeitung</div>
+            <div class="SubheadingStart">Abi-2024</div>
+            <div class="SubheadingStart">CDG-Wuppertal</div>
+            <form method="POST" action="/submit">
+                <div class="form">
+                    <input name="Zitat" type="text" id="input" placeholder="Dein Zitat..." onkeypress="return event.keyCode != 13;">
+                    <button id="button">Submit</button>
+                </div>
+            </form>
+            
+            <img src="public/Assets/Chevron-Down.png" style="height: 10px; color:antiquewhite;"></div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="SecondCard">
+        <div class="Heading">Unsere Zitate</div>
+        <div class="Subheading">Hier sind die Zitate, die ihr uns geschickt habt.</div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="ThirdCard">
+            <div class="main-gallery js-flickity" 
+            data-flickity-options='{ "cellAlign": "left", "contain": true , "prevNextButtons": true}'>
+                <% for(var j = 0; j <= Math.round(allquoteentries.length / 5); j++){ %>
+                <div class="gallery-cell">
+                    <div class="List">
+                        <% for(var i = j * 5; i < ((j * 5) + 5) ; i++) { %>
+                            <% if(i < allquoteentries.length){ %>
+                            <div class="Element">
+                                <%= allquoteentries[i]["quote"] %>
+                            </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="/public/script.js"></script>
+    <script src="https://unpkg.com/flickity@2.3.0/dist/flickity.pkgd.min.js"></script>
+
+</body>
+</html> 
