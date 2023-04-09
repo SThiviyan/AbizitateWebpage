@@ -1,7 +1,8 @@
 # AbizitateWebpage
 Die Seite für das sammeln der Abizitate des Abi Jahrgangs 2024 - CDG Wuppertal
 
-**Erreichbar unter:
+## Erreichbar unter:
 https://Abizitate24.de/
 
-Programmiert mithilfe von Express für Node.js
+Programmiert mithilfe von Express für Node.js und Sqlite3 als Database.
+
