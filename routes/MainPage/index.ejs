@@ -36,7 +36,7 @@
         <div class="ThirdCard">
             <div class="main-gallery js-flickity" 
             data-flickity-options='{ "cellAlign": "left", "contain": true , "prevNextButtons": true}'>
-                <% for(var j = 0; j <= Math.round(allquoteentries.length / 5); j++){ %>
+                <% for(var j = 0; j < Math.round(allquoteentries.length / 5); j++){ %>
                 <div class="gallery-cell">
                     <div class="List">
                         <% for(var i = j * 5; i < ((j * 5) + 5) ; i++) { %>
