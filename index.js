@@ -7,14 +7,14 @@ const http = require('http');
 
 const router=require('./routes/pagerouter.js');
 
-var key = fs.readFileSync('/etc/letsencrypt/live/abizitate24.de/privkey.pem');
-var cert = fs.readFileSync('/etc/letsencrypt/live/abizitate24.de/cert.pem');
-var chain = fs.readFileSync('/etc/letsencrypt/live/abizitate24.de/chain.pem');
+var key = fs.readFileSync('./ssl/selfsigned.key');
+var cert = fs.readFileSync('./ssl/selfsigned.crt');
+//var chain = fs.readFileSync('/etc/letsencrypt/live/abizitate24.de/chain.pem');
 
 var options = {
     key: key,
     cert: cert,
-    ca: chain
+//    ca: chain
 };
 
 const app = express();
@@ -27,7 +27,8 @@ app.use(express.static(path.join( __dirname, './routes/MainPage')));
 app.use('/', router);
 
 
-var server = https.createServer(options, app);
+//options war hier
+var server = https.createServer(options,app);
 var httpServer = http.createServer(app)
 
 httpServer.listen(80, () => {

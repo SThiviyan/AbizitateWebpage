@@ -9,15 +9,14 @@ html
 {
     margin:0;
     padding:0;
-    box-sizing: border-box;
 }
 
 body
 {   
     background-attachment: fixed;
 
-    background: #e76f51;
-    color: #ffffff;
+    background-color: #e8e8e8;
+    color: #2b6777;
     font-family: "Helvetica";
     display: flex;
     flex-direction: column;
@@ -38,45 +37,39 @@ body.stop-scrolling
     position: fixed;
 }
 
-.card
+[data-theme="dark"]
 {
-    width: 100vw;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-   
+    background-color: #212121;
 }
-
 
 .FirstCard
 {
     width: 100vw;
     height: 100vh;
-    background-color: #e76f51;
+    background-color: #e8e8e8;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    top: 0;
 }
 
 .SecondCard
 {
     width: 100vw;
     height: 100vh;
-    background-color: #7869dc;
+    background-color: #c8d8e4;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: sticky;
+    top: 0;
 }
 
 
-.ThirdCard
-{
-    width: 100vw;
-    height: 100vh;
-    background-color: #d9b3a9;
-}
+
 
 .Heading {
     margin-top: 2vh;
@@ -109,14 +102,15 @@ body.stop-scrolling
     align-items: center;
 }
 
-#input 
+.input 
 {
     width: 400px;
     height: 50px;
     margin-top: 25%;
-    margin-bottom: 100px;
+    margin-bottom: 90px;
     border-radius: 5px;
-    border: 1px solid #ffffff;
+    background-color: #f2f2f2;
+    border: 1px solid #2b6777;
     font-size: 15px;
     padding: 10px;
 }
@@ -129,44 +123,57 @@ body.stop-scrolling
     border-radius: 5px;
     border: 1px solid #ffffff;
     font-size: 15px;
-    padding: 5px;
-    background-color: #ffffff;
-    color: #EFA074;
+    padding: 25px;
+    background-color: #c8d8e4;
+    color: #2b6777;
     font-weight: 700;
-    margin-bottom: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;  
+    margin-bottom: 15%;
+
 }
 
 
-.arrow
-{
-
-   -webkit-clip-path: polygon(50% 0%, 
-                              100% 0%, 
-                              50% 50%, 
-                              100% 100%, 
-                              50% 100%, 
-                              0% 50%);
-    clip-path: polygon(50% 0%, 
-                       100% 0%, 
-                       50% 50%, 
-                       100% 100%, 
-                       50% 100%, 
-                       0% 50%);
-
-  
-    background:#ffffff; 
+.chevron {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 13.1l-8-8 2.1-2.2 5.9 5.9 5.9-5.9 2.1 2.2z'/%3E%3C/svg%3E");
+    height: 30px;
+    width: 30px;
+    background-repeat: no-repeat;
 }
 
-input:focus {
+
+.input:focus {
     outline: none;
 }
+
+
+.Titlebar
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    padding: 20px;
+}
+
+.title
+{
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #2b6777;
+}
+
+
+
 
 
 .List
 {
     width: 100vw;
-    height: 100vh;
-    background-color: #e76f51;
+    background-color: #e8e8e8;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -174,7 +181,7 @@ input:focus {
     padding-top: 10%; 
 
     opacity: 1; /* Set the initial opacity to 0 */
-    position: relative;
+    position: sticky;
     top: 0;
     transition: opacity 1s ease-in-out, top 0s ease-in-out 2s; 
 }
@@ -185,29 +192,140 @@ input:focus {
     transition: opacity 1s ease-in-out, top 0s ease-in-out; 
 }
 
-
-
-.Element
+.QuoteObject
 {
-    background-color: #5c6fc2;
-    padding: 10px;
-    width: 65vw;
-    height: 25vw;
-    margin: 5px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 80%;
     font-weight: 700;
-    font-size: 13px;
-    text-indent: 1px;
 }
 
 
 
+.VoteButton
+{
+    margin-left: auto;
+    background-color: #e8e8e8;
+    padding: 5px;
+    margin-left: 20px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: right;
+    display: flex;
+    flex-direction: column;
+    color: gray;
+}
+
+.Quote
+{
+    align-items: left;
+}
+
+hr 
+{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+.horizontalobject
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.con-like {
+    --red: #ee4242;
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .con-like .like {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 20;
+    cursor: pointer;
+  }
+  
+  .con-like .checkmark {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .con-like .outline,
+  .con-like .filled {
+    fill: var(--red);
+    position: absolute;
+  }
+  
+  .con-like .filled {
+    animation: kfr-filled 0.5s;
+    display: none;
+  }
+  
+  .con-like .celebrate {
+    position: absolute;
+    animation: kfr-celebrate 0.5s;
+    animation-fill-mode: forwards;
+    display: none;
+  }
+  
+  .con-like .poly {
+    stroke: var(--red);
+    fill: var(--red);
+  }
+  
+  .con-like .like:checked ~ .checkmark .filled {
+    display: block
+  }
+  
+  .con-like .like:checked ~ .checkmark .celebrate {
+    display: block
+  }
+  
+  @keyframes kfr-filled {
+    0% {
+      opacity: 0;
+      transform: scale(0);
+    }
+  
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  
+  @keyframes kfr-celebrate {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      opacity: 0.8;
+    }
+  
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+      display: none;
+    }
+  }
+
+
 @media (max-width: 480px)
 {
-    #input 
+    .input 
     {
         width: 80vw;
         height: 50px;
@@ -241,7 +359,7 @@ input:focus {
         margin-top: 1vh;
     }
 
-    #input
+    .input
     {
         margin-top: 4%;
         margin-bottom: 20px;

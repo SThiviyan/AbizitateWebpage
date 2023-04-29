@@ -13,7 +13,13 @@ router.get('/', (req, res) => {
                             console.log(err);
     
                         });
-    
+
+});
+
+router.post("/like", (req, res) => {
+    console.log(req.body);
+    let id = req.body.id;
+    console.log(id);
 });
 
 
