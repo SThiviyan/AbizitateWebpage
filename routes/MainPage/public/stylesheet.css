@@ -37,10 +37,6 @@ body.stop-scrolling
     position: fixed;
 }
 
-[data-theme="dark"]
-{
-    background-color: #212121;
-}
 
 .FirstCard
 {
@@ -163,7 +159,6 @@ body.stop-scrolling
     font-size: 30px;
     font-weight: 700;
 
-    color: #2b6777;
 }
 
 
@@ -389,6 +384,41 @@ hr
 }
 
 
-@media (pointer:none), (pointer:coarse) {
-    
+
+@media (prefers-color-scheme: dark)
+{
+
+    body 
+    {
+        background-color: #212121;
+        color: #3897b1;
+    }
+
+    .FirstCard
+    {
+        background-color: #212121;
+    }
+
+    .SecondCard
+    {
+        background-color: #333a3c;
+    }
+
+    .List
+    {
+        background-color: #212121;
+    }
+
+    .input
+    {
+        background-color: #363434;
+        color: white;
+    }
+
+    .VoteButton
+    {
+        background-color: #212121;
+        color: white;
+    }
+
 }
