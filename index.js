@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const https = require('https');
 const http = require('http');
+const evercookie = require('evercookie');
+const cookieParser = require('cookie-parser');
 
 const router=require('./routes/pagerouter.js');
 
@@ -19,6 +21,8 @@ var options = {
 
 const app = express();
 
+app.use(evercookie.backend());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.set("view engine", "ejs");
 
