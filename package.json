@@ -9,6 +9,7 @@
   "author": "Thiviyan Saravanamuthu",
   "license": "ISC",
   "dependencies": {
+    "clientjs": "^0.2.1",
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "evercookie": "^1.0.1",

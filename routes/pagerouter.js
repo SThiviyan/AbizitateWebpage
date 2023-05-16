@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../Database/database.js');
-const evercookie = require('evercookie');
 
 
 router.get('/', (req, res) => {
 
 
-    const likes = req.evercookie.get('likes') || [];
+    //const likes = req.evercookie.get('likes') || [];
 
     let allquoteentries = db.getallapprovedfromDB()
     .then((allquoteentries) => {
-        res.render(__dirname + '/MainPage/index', { allquoteentries : allquoteentries, likes : likes});
+        res.render(__dirname + '/MainPage/index', { allquoteentries : allquoteentries});
     })
     .catch((err) => {
         console.log(err);
@@ -21,18 +20,32 @@ router.get('/', (req, res) => {
 });
 
 router.post("/like", (req, res, next) => {
-    console.log(req.body);
-    let id = req.body.like;
-    console.log(id);
+    //console.log(req.body);
 
-    if(req.body.like)
+    var array = req.body.Likes;
+    var fingerprint = req.body.Fingerprint;
+    
+    if(array != null && fingerprint != null)
     {
-        console.log("like");
-    }
+        console.log(array);
+        console.log(fingerprint);
 
-    var array = req.body.like;
-    req.evercookie.set('likes', array);
-    res.send("likes stored");
+        let secondarray  = db.getLikesfromDB(fingerprint)
+                            .then((secondarray) => {
+                            if(db.getLikesfromDB(fingerprint).length > array.length)
+                            {
+                                db.addLikesToDB(fingerprint, array);
+                            }
+                            else
+                            {
+                                db.removeLikesfromDB(fingerprint, array);
+                            }
+                        });
+        
+        console.log(db.getLikesfromDB());
+    }
+    //req.evercookie.set('likes', array);
+    res.redirect('/');
 });
 
 
@@ -44,9 +57,8 @@ router.get('/submit', (req, res, next) => {
 });
 
 router.post('/submit', (req, res, next) => {
-    console.log(req.body);
     input = req.body.Zitat;
-    console.log(input);
+    console.log(req.body);
     whitespacestr = input.replace(/\s/g, '').length;
 
     if(input != null && whitespacestr > 0 && input.length != "")

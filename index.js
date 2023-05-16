@@ -23,7 +23,7 @@ const app = express();
 
 app.use(evercookie.backend());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json()); 
 app.set("view engine", "ejs");
 
 app.use(ensureSecure);

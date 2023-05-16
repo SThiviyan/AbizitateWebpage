@@ -35,7 +35,7 @@ class databasemanager
     addtoDB(id, quote, approved)
     {        
 
-        this.db.all("INSERT INTO quotes (id, quote, approved) VALUES (?, ?, ?)", [id, quote, approved], (err, rows) => {
+        this.db.all("INSERT INTO quotes (id, quote, approved, NumLikes) VALUES (?, ?, ?, ?)", [id, quote, approved, 0], (err, rows) => {
             if (err) {
                 throw err;  
             }
@@ -100,6 +100,114 @@ class databasemanager
                 }
             });
         });
+    }
+
+
+    getLikesfromDB(fingerprint)
+    {
+        return new Promise((resolve, reject) => {
+            const d = this.openDB();
+            this.db.get("SELECT likes FROM likes WHERE fingerprint = ?", [fingerprint], (err, row) => {
+                if (err) {
+                    reject(err);
+                }
+                else
+                {
+                    resolve(row["likes"]);
+                }
+            });
+        });
+    }
+
+    removeLikesfromDB(fingerprint, likes)
+    {
+        const d = this.openDB();
+
+        this.db.all("INSERT INTO likes (fingerprint, likes) VALUES (?, ?)", [fingerprint, likes], (err, rows) => {
+            if (err) {
+                    throw err;
+            }
+            else
+            {
+                console.log("Added likes to fingerprint-like database");
+            }
+        });
+
+        var dblikes = likes
+        var oldlikes = this.getLikesfromDB(fingerprint)
+        
+        for(var i = 0; i < dblikes.length; i++)
+        {
+            for(var n = 0; n < oldlikes.length; n++)
+            {
+                if(dblikes[i] == oldlikes[n])
+                {
+                    dblikes.splice(i, 1);
+                }
+            }
+        }
+
+        for(var i = 0; i < likes.length; i++)
+        {
+            this.db.all("UPDATE quotes SET NumLikes = NumLikes - 1 WHERE id = ?", [likes[i]], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                else
+                {
+                    console.log("Removed likes from fingerprint-like database");
+                }
+            });
+        }
+   
+    }
+
+
+
+    addLikesToDB(fingerprint, likes)
+    {
+       
+        const d = this.openDB();
+        this.db.all("INSERT INTO likes (fingerprint, likes) VALUES (?, ?)", [fingerprint, likes], (err, rows) => {
+            if (err) {
+                    throw err;
+            }
+            else
+            {
+                console.log("Added likes to fingerprint-like database");
+            }
+        });
+
+        var dblikes = likes
+        var oldlikes = this.getLikesfromDB(fingerprint)
+        
+        for(var i = 0; i < dblikes.length; i++)
+        {
+            for(var n = 0; n < oldlikes.length; n++)
+            {
+                if(dblikes[i] == oldlikes[n])
+                {
+                    dblikes.splice(i, 1);
+                }
+            }
+        }
+
+
+        for(var i = 0; i < dblikes.length; i++)
+        {
+            this.db.all("UPDATE quotes SET NumLikes = NumLikes + 1 WHERE id = ?", [dblikes[i]], (err, rows) => {
+                if (err) {
+                    throw err;
+                }
+                else
+                {
+                    console.log("Updated likes in quotes database");
+                }
+            });
+        }
+        this.closeDB();
+    
+    
     }
 
 }

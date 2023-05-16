@@ -16,7 +16,7 @@
         <div class="SubheadingStart">Abizeitung</div>
         <div class="SubheadingStart">Abi-2024</div>
             <div class="SubheadingStart">CDG-Wuppertal</div>
-            <form method="POST" action="/submit">
+            <form method="POST" action="/submit" id="QuoteForm">
                 <div class="form">
                     <input class="input" name="Zitat" type="text" id="input" placeholder="Dein Zitat..." onkeypress="return event.keyCode != 13;">
                     <button id="button">Submit</button>
@@ -51,7 +51,7 @@
                            </div>
                             <div class = "VoteButton">
                                  <div class="con-like">
-                                        <input name="like" onChange="this.form.submit()" title="like" type="checkbox" class="like" value="<%= allquoteentries[j]["id"]%>">
+                                        <input title="like" name="like" onChange="this.form.submit()"  type="checkbox" class="like" value="<%= allquoteentries[j]["id"]%>">
                                             <div class="checkmark">
                                                 <svg viewBox="0 0 24 24" class="outline" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
@@ -79,10 +79,56 @@
             </form>
         </div>
     <script src="/public/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clientjs@0.1.11/dist/client.min.js"></script>
     <script src="https://unpkg.com/flickity@2.3.0/dist/flickity.pkgd.min.js"></script>
-    <script>
+    <script type="text/javascript">
+    
+        $(document).ready(function() {
+            var client = new ClientJS();
+            var fingerprint = client.getFingerprint();
+
+            $('.like').change(function() {
+                const formdata = $('#Likes').serializeArray();
+                
+                const jsondata = JSON.stringify(({"Likes": formdata, "Fingerprint": fingerprint}));
+            
+                $.ajax({
+                    type: 'POST',
+                    url: '/like',
+                    data: jsondata,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data) {
+                        console.log("success")
+                    }
+                });
+        });
+
+        });
+
+        
+        const QuoteForm = document.getElementById("QuoteForm");
+
+        QuoteForm.addEventListener('submit', async(event) => {
+            event.preventDefault();
+
+            const formdata = new FormData(QuoteForm);
+            const jsonData = JSON.stringify(Object.fromEntries(formdata));
 
 
+            const response = await fetch('submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: jsonData
+            });
+
+            const result = await response.json();
+            //console.log(result);
+            
+        })
+        
     </script>
 
 </body>

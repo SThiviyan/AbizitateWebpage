@@ -1,4 +1,3 @@
-var jquery = require('jquery');
 // Select the div that contains the list of objects
 const animateOnScroll = document.querySelector('.List');
 
